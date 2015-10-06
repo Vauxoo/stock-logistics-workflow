@@ -18,5 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import models
-from . import wizards
+from . import product_template
+from . import stock_move
+from . import stock_production_lot

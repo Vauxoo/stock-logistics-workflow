@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Copyright 2015 Vauxoo
-#    Author: Moisés Lopez, Osval Reyes
+#    Author: Moisés Lopez, Sergio Tostado, Osval Reyes
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,5 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import models
-from . import wizards
+from . import stock_transfer_details
