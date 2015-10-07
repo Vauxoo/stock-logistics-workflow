@@ -6,7 +6,7 @@
 Product Stock No Negative
 =========================
 
-This module extends warehouse functionalities to not reach below zero in product quantities
+This module extends warehouse functionalities to not reach below zero in product available quantities
 
 Installation
 ============

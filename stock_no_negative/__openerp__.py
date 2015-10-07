@@ -23,10 +23,6 @@
     "version": "8.0.1.0.1",
     "author": "Vauxoo",
     "category": "Generic Modules",
-    "description": """
-This module check that can not move a product with quantity available negative
-
-""",
     "website": "http://www.vauxoo.com",
     "license": "AGPL-3",
     "depends": [
