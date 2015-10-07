@@ -11,7 +11,7 @@ This module extends warehouse functionalities to not reach below zero in product
 Installation
 ============
 
-Just selected from available modules to install it, there is no need to extra installations
+Just select it from available modules to install it, there is no need to extra installations
 
 Configuration
 =============
