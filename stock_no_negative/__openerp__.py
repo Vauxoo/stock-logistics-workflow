@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
+##############################################################################
 #
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (c) 2014 Vauxoo - http://www.vauxoo.com/
-#    All Rights Reserved.
-#    info Vauxoo (info@vauxoo.com)
-#
-#    Coded by: Luis Torres (luis_t@vauxoo.com)
-#
+#    Copyright 2015 Vauxoo
+#    Author: Luis Torres, Osval Reyes
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,10 +17,10 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#
+##############################################################################
 {
     "name": "Stock check no negative",
-    "version": "1.0",
+    "version": "8.0.1.0.1",
     "author": "Vauxoo",
     "category": "Generic Modules",
     "description": """
@@ -33,19 +28,13 @@ This module check that can not move a product with quantity available negative
 
 """,
     "website": "http://www.vauxoo.com",
-    "license": "",
+    "license": "AGPL-3",
     "depends": [
         "stock"
     ],
-    "demo": [],
     "data": [
-        "view/product_view.xml"
+        "views/product_template.xml"
     ],
-    "test": [],
-    "js": [],
-    "css": [],
-    "qweb": [],
     "installable": True,
     "auto_install": False
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

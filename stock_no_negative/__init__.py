@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
+##############################################################################
 #
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (c) 2014 Vauxoo - http://www.vauxoo.com/
-#    All Rights Reserved.
-#    info Vauxoo (info@vauxoo.com)
-#
-#    Coded by: Luis Torres (luis_t@vauxoo.com)
-#
+#    Copyright 2015 Vauxoo
+#    Author: Luis Torres, Osval Reyes
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,4 +17,5 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-from . import model
+###############################################################################
+from . import models
