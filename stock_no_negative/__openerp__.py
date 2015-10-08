@@ -19,9 +19,9 @@
 #
 ##############################################################################
 {
-    "name": "Stock check no negative",
+    "name": "Stock Check No Negative",
     "version": "8.0.1.0.1",
-    "author": "Vauxoo",
+    "author": "Vauxoo,Odoo Community Association (OCA)",
     "category": "Generic Modules",
     "website": "http://www.vauxoo.com",
     "license": "AGPL-3",

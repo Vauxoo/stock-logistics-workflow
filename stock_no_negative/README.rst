@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=========================
-Product Stock No Negative
-=========================
+=======================
+Stock Check No Negative
+=======================
 
 This module extends warehouse functionalities to not reach below zero in product available quantities
 
