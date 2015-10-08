@@ -19,7 +19,8 @@
 #
 ##############################################################################
 from lxml import etree
-from openerp import models, api
+
+from openerp import api, models
 
 
 def domain_str_append(old_domain_str, subdomain_str):
