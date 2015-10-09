@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
+##############################################################################
 #
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (c) 2015 Vauxoo - http://www.vauxoo.com/
-#    All Rights Reserved.
-#    info Vauxoo (info@vauxoo.com)
-#
-#    Coded by: Luis Torres (luis_t@vauxoo.com)
-#
+#    Copyright 2015 Vauxoo
+#    Author: Luis Torres, Osval Reyes
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,7 +17,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-
+##############################################################################
 from openerp import _, exceptions, models
 
 
@@ -69,7 +64,6 @@ class StockMove(models.Model):
         Method to check operation or move plus lot_id
         easiest inherit cases before action done
         """
-        # TODO: stock_move use product_uom
         self.check_before_done_no_negative(
             cr, uid, operation_or_move.product_id.id,
             operation_or_move.product_uom_id.id,
@@ -90,10 +84,10 @@ class StockMove(models.Model):
         # operations before done
         operations_before_done = self.get_operations_as_action_done(
             cr, uid, ids, context=context)
+
         for operation in operations_before_done:
-            lot_id = operation.lot_id.id \
-                if operation.lot_id \
-                else False
+            lot_id = operation.lot_id.id if operation.lot_id else False
+
             self.check_before_action_done(
                 cr, uid, operation, lot_id, context=context)
 
@@ -103,10 +97,10 @@ class StockMove(models.Model):
         # operations after done
         operations_after_done = self.get_operations_as_action_done(
             cr, uid, ids, context=context)
+
         for operation in operations_after_done:
-            lot_id = operation.lot_id.id \
-                if operation.lot_id \
-                else False
+            lot_id = operation.lot_id.id if operation.lot_id else False
+
             self.check_after_action_done(
                 cr, uid, operation, lot_id, context=context)
         return res
@@ -170,15 +164,15 @@ class StockMove(models.Model):
                             context=context)[0]
                         lot_msg_str = _(
                             " with the lot/serial '%s' "
-                            ) % lot_data['name']
+                        ) % lot_data['name']
                     raise exceptions.ValidationError(_(
                         "Product '%s' has active "
                         "'check no negative' \n"
                         "but with this move "
                         "you will have a quantity of "
                         "'%s' \n%sin location \n'%s'"
-                        ) % (product_data['name'],
-                             qty_available_after_done,
-                             lot_msg_str,
-                             location_data['complete_name'],))
+                    ) % (product_data['name'],
+                         qty_available_after_done,
+                         lot_msg_str,
+                         location_data['complete_name'],))
         return True

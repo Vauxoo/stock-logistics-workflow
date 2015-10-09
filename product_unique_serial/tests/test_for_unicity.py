@@ -1,13 +1,8 @@
-# -*- encoding: utf-8 -*-
-###############################################################################
-#    Module Writen to OpenERP, Open Source Management Solution
+# -*- coding: utf-8 -*-
+##############################################################################
 #
-#    Copyright (c) 2010 Vauxoo - http://www.vauxoo.com/
-#    All Rights Reserved.
-#    info Vauxoo (info@vauxoo.com)
-###############################################################################
-#    Coded by: Sergio Ernesto Tostado Sánchez (sergio@vauxoo.com)
-###############################################################################
+#    Copyright 2015 Vauxoo
+#    Author: Moisés Lopez, Sergio Tostado, Osval Reyes
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,12 +17,12 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-###############################################################################
+##############################################################################
 
 from copy import deepcopy
 
-from openerp.tests.common import TransactionCase
 from openerp.exceptions import except_orm
+from openerp.tests.common import TransactionCase
 from openerp.tools import mute_logger
 from psycopg2 import IntegrityError
 

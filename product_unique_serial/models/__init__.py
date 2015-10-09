@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
+##############################################################################
 #
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (c) 2015 Vauxoo - http://www.vauxoo.com/
-#    All Rights Reserved.
-#    info Vauxoo (info@vauxoo.com)
-#
-#    Coded by: Luis Torres (luis_t@vauxoo.com)
-#
+#    Copyright 2015 Vauxoo
+#    Author: Moisés Lopez, Osval Reyes
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,15 +17,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#
-from openerp import fields, models
-
-
-class ProductTemplate(models.Model):
-    _inherit = 'product.template'
-
-    check_no_negative = fields.Boolean(
-        'Check no negative',
-        help='If this field is True can not move this'
-             ' product in negative quantity available in'
-             ' the internal location source')
+##############################################################################
+from . import product_template
+from . import stock_move
+from . import stock_production_lot

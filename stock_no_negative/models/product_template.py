@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Copyright 2015 Vauxoo
-#    Author: Moisés Lopez, Osval Reyes
+#    Author: Luis Torres, Osval Reyes
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,5 +18,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import models
-from . import wizards
+from openerp import fields, models
+
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    check_no_negative = fields.Boolean(
+        'Check no negative',
+        help='If this field is True can not move this'
+             ' product in negative quantity available in'
+             ' the internal location source')
