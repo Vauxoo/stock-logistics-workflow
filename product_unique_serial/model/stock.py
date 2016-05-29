@@ -57,6 +57,10 @@ class StockQuant(models.Model):
     @api.multi
     @api.constrains('product_id', 'lot_id', 'qty')
     def _check_inicity_lot_product(self):
+        note = _(
+            'Remember: When a serial number (lot) is selected, its quantity '
+            'is fixed against the quantity in the serial number (lot) and not '
+            'against the quantity in full of the product.')
         for line in self:
             if line.lot_id and line.product_id and\
                     line.product_id.lot_unique_ok:
@@ -67,12 +71,17 @@ class StockQuant(models.Model):
                     ('location_id', '=', line.location_id.id)])
                 if line.qty > 1:
                     raise ValidationError(_(
-                        'You should only receive by the piece with the same '
-                        'serial number'))
+                        'Product %s has been configured to use unique lots. '
+                        'You are trying to set %s items in lot %s. %s' % (
+                            line.product_id.name, line.qty,
+                            line.lot_id.name, note)))
                 elif sum([x.qty for x in quants]) > 1:
                     raise ValidationError(_(
-                        'The serial number %s can only belong to a single '
-                        'product in stock') % line.lot_id.name)
+                        'Product %s has been configured to use unique lots. '
+                        'You are trying to increase %s items in the lot %s.'
+                        ' %s' % (
+                            line.product_id.name, line.qty,
+                            line.lot_id.name, note)))
 
 
 class StockInventoryLine(models.Model):
