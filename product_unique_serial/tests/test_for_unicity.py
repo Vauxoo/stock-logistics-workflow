@@ -179,7 +179,7 @@ class TestUnicity(TransactionCase):
             picking_1,
             self.env.ref('product_unique_serial.serial_number_demo_1'))
         with self.assertRaisesRegexp(
-                exceptions.Warning,
+                exceptions.ValidationError,
                 "The serial number 86137801852514 can only belong to"
                 " a single product in stock"):
             self.transfer_picking(
@@ -236,7 +236,7 @@ class TestUnicity(TransactionCase):
             picking_1,
             self.env.ref('product_unique_serial.serial_number_demo_1'))
         with self.assertRaisesRegexp(
-                exceptions.Warning,
+                exceptions.ValidationError,
                 "The serial number 86137801852514 can only belong to"
                 " a single product in stock"):
             self.transfer_picking(
@@ -297,7 +297,7 @@ class TestUnicity(TransactionCase):
             picking_out_1,
             self.env.ref('product_unique_serial.serial_number_demo_1'))
         with self.assertRaisesRegexp(
-                exceptions.Warning,
+                exceptions.ValidationError,
                 "The serial number 86137801852514 can only belong to"
                 " a single product in stock"):
             self.transfer_picking(
@@ -366,7 +366,7 @@ class TestUnicity(TransactionCase):
             picking_out_1,
             self.env.ref('product_unique_serial.serial_number_demo_1'))
         with self.assertRaisesRegexp(
-                exceptions.Warning,
+                exceptions.ValidationError,
                 "The serial number 86137801852514 can only belong to"
                 " a single product in stock"):
             self.transfer_picking(
@@ -400,7 +400,7 @@ class TestUnicity(TransactionCase):
             self.env.ref('stock.picking_type_in'))
         # Executing the wizard for pickings transfering
         with self.assertRaisesRegexp(
-                exceptions.Warning,
+                exceptions.ValidationError,
                 "You should only receive by the piece with the same serial "
                 "number"):
             self.transfer_picking(
@@ -566,7 +566,7 @@ class TestUnicity(TransactionCase):
         stock_move_2.action_confirm()
         # Error raised expected with message expected.
         with self.assertRaisesRegexp(
-                exceptions.Warning,
+                exceptions.ValidationError,
                 "The serial number %s can only belong to"
                 " a single product in stock" % lot_vals['name']):
             stock_move_2.action_done()
@@ -611,7 +611,7 @@ class TestUnicity(TransactionCase):
         stock_move_2.action_confirm()
         # Error raised expected with message expected.
         with self.assertRaisesRegexp(
-                exceptions.Warning,
+                exceptions.ValidationError,
                 "The serial number %s can only belong to"
                 " a single product in stock" % lot_vals['name']):
             stock_move_2.action_done()
@@ -633,8 +633,9 @@ class TestUnicity(TransactionCase):
             'product_qty': 5,
             'inventory_id': stock_inv.id
         })
+
         with self.assertRaisesRegexp(
-                exceptions.Warning,
+                exceptions.ValidationError,
                 "You should only receive by the piece with the same serial "
                 "number"):
             stock_inv.action_done()
