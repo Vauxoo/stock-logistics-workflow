@@ -32,19 +32,6 @@ from openerp.tools import mute_logger
 from psycopg2 import IntegrityError
 from openerp import _
 
-note = _(
-    u'Remember: When a serial number (lot) is selected, its quantity '
-    u'is fixed against the quantity in the serial number (lot) and not '
-    u'against the quantity in full of the product.')
-
-msg_greater = _(
-    u'Product %s has been configured to use unique lots. '
-    u'You are trying to set %s items in lot %s. %s')
-
-msg_increase = _(
-    u'Product %s has been configured to use unique lots. '
-    u'You are trying to increase %s items in the lot %s. %s')
-
 
 class TestUnicity(TransactionCase):
 
@@ -53,6 +40,19 @@ class TestUnicity(TransactionCase):
     module unicity:
     - Test 1: Can't be created two Serial Numbers with the same name
     """
+
+    note = _(
+        u'Remember: When a serial number (lot) is selected, its quantity '
+        u'is fixed against the quantity in the serial number (lot) and not '
+        u'against the quantity in full of the product.')
+
+    msg_greater = _(
+        u'Product %s has been configured to use unique lots. '
+        u'You are trying to set %s items in lot %s. %s')
+
+    msg_increase = _(
+        u'Product %s has been configured to use unique lots. '
+        u'You are trying to increase %s items in the lot %s. %s')
 
     def setUp(self):
         super(TestUnicity, self).setUp()
@@ -194,7 +194,7 @@ class TestUnicity(TransactionCase):
 
         with self.assertRaises(exceptions.ValidationError) as err:
             self.transfer_picking(picking_2, [lot_id])
-        msg = msg_increase % (product.name, 1.0, lot_id.name, note)
+        msg = self.msg_increase % (product.name, 1.0, lot_id.name, self.note)
         self.assertEquals(err.exception.value, msg)
 
     def test_1_2_1product_1serialnumber_2p_track_incoming(self):
@@ -248,7 +248,7 @@ class TestUnicity(TransactionCase):
 
         with self.assertRaises(exceptions.ValidationError) as err:
             self.transfer_picking(picking_2, [lot_id])
-        msg = msg_increase % (product.name, 1.0, lot_id.name, note)
+        msg = self.msg_increase % (product.name, 1.0, lot_id.name, self.note)
         self.assertEquals(err.exception.value, msg)
 
     def test_2_1_1product_1serialnumber_2p_out(self):
@@ -303,7 +303,7 @@ class TestUnicity(TransactionCase):
         self.transfer_picking(picking_out_1, lot_id)
         with self.assertRaises(exceptions.ValidationError) as err:
             self.transfer_picking(picking_out_2, lot_id)
-        msg = msg_increase % (product.name, 1.0, lot_id.name, note)
+        msg = self.msg_increase % (product.name, 1.0, lot_id.name, self.note)
         self.assertEquals(err.exception.value, msg)
 
     def test_2_2_1product_1serialnumber_2p_track_outgoing(self):
@@ -366,7 +366,7 @@ class TestUnicity(TransactionCase):
         self.transfer_picking(picking_out_1, lot_id)
         with self.assertRaises(exceptions.ValidationError) as err:
             self.transfer_picking(picking_out_2, lot_id)
-        msg = msg_increase % (product.name, 1.0, lot_id.name, note)
+        msg = self.msg_increase % (product.name, 1.0, lot_id.name, self.note)
         self.assertEquals(err.exception.value, msg)
 
     def test_3_1product_qtyno1_1serialnumber_1p_in(self):
@@ -398,7 +398,7 @@ class TestUnicity(TransactionCase):
         # Executing the wizard for pickings transfering
         with self.assertRaises(exceptions.ValidationError) as err:
             self.transfer_picking(picking_1, [lot_id])
-        msg = msg_greater % (product.name, 2.0, lot_id.name, note)
+        msg = self.msg_greater % (product.name, 2.0, lot_id.name, self.note)
         self.assertEquals(err.exception.value, msg)
 
     def test_4_1product_qty3_3serialnumber_1p_in(self):
@@ -561,7 +561,7 @@ class TestUnicity(TransactionCase):
         # Error raised expected with message expected.
         with self.assertRaises(exceptions.ValidationError) as err:
             stock_move_2.action_done()
-        msg = msg_increase % (product.name, 1.0, lot_move.name, note)
+        msg = self.msg_increase % (product.name, 1.0, lot_move.name, self.note)
         self.assertEquals(err.exception.value, msg)
 
     def test_7_2_1product_1serialnumber_track_production_out(self):
@@ -605,7 +605,7 @@ class TestUnicity(TransactionCase):
         # Error raised expected with message expected.
         with self.assertRaises(exceptions.ValidationError) as err:
             stock_move_2.action_done()
-        msg = msg_increase % (product.name, 1.0, lot_move.name, note)
+        msg = self.msg_increase % (product.name, 1.0, lot_move.name, self.note)
         self.assertEquals(err.exception.value, msg)
 
     def test_8_inventory_adjustment(self):
@@ -628,5 +628,6 @@ class TestUnicity(TransactionCase):
 
         with self.assertRaises(exceptions.ValidationError) as err:
             stock_inv.action_done()
-        msg = msg_greater % (self.prod_d1.name, 5.0, lot_id.name, note)
+        msg = self.msg_greater % (
+            self.prod_d1.name, 5.0, lot_id.name, self.note)
         self.assertEquals(err.exception.value, msg)
