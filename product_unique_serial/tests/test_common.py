@@ -121,4 +121,3 @@ class TestCommon(TransactionCase):
                         index += 1
             # Executing the picking transfering
             wizard_for_transfer.do_detailed_transfer()
-
