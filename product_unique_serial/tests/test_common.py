@@ -9,12 +9,8 @@ from openerp import _
 
 
 class TestCommon(TransactionCase):
-
-    """
-    This test will prove the next cases to procure the
-    module unicity:
-    - Test 1: Can't be created two Serial Numbers with the same name
-    """
+    """ This test will prove the next cases to procure the module uniqueness:
+    - Test 1: Can't be created two Serial Numbers with the same name"""
 
     note = _(
         u'Remember: When a serial number (lot) is selected, its quantity '

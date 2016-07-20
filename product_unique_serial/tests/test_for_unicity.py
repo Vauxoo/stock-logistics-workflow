@@ -25,25 +25,19 @@
 ###############################################################################
 
 from openerp import exceptions
-from .test_common import TestCommon
 from openerp.tools import mute_logger
 from psycopg2 import IntegrityError
+from .test_common import TestCommon
 
 
 class TestUnicity(TestCommon):
 
-    """
-    This test will prove the next cases to procure the
-    module unicity:
+    """ This test will prove the next cases to procure the module uniqueness:
     - Test 1: Can't be created two Serial Numbers with the same name
     """
 
-    def setUp(self):
-        super(TestUnicity, self).setUp()
-
     def test_1_1_1product_1serialnumber_2p_in(self):
-        """
-        Test 1.1. Creating 2 pickings with 1 product for the same serial
+        """ Test 1.1. Creating 2 pickings with 1 product for the same serial
         number, in the receipts scope, with the next form:
         - Picking 1 IN
         =============================================
@@ -88,9 +82,8 @@ class TestUnicity(TestCommon):
         self.assertEquals(err.exception.value, msg)
 
     def test_1_2_1product_1serialnumber_2p_track_incoming(self):
-        """
-        Test 1.2. (track incoming) Creating 2 pickings with 1 product for the
-        same serial number, in the receipts scope, with the next form:
+        """ Test 1.2. (track incoming) Creating 2 pickings with 1 product for
+        the same serial number, in the receipts scope, with the next form:
         - Picking 1 IN
         =============================================
         || Product ||  Quantity  ||  Serial Number ||
@@ -142,8 +135,7 @@ class TestUnicity(TestCommon):
         self.assertEquals(err.exception.value, msg)
 
     def test_2_1_1product_1serialnumber_2p_out(self):
-        """
-        Test 2.1. Creating 2 pickings with 1 product for the same serial
+        """ Test 2.1. Creating 2 pickings with 1 product for the same serial
         number, in the delivery orders scope, with the next form:
         - Picking 1 OUT
         =============================================
@@ -197,9 +189,9 @@ class TestUnicity(TestCommon):
         self.assertEquals(err.exception.value, msg)
 
     def test_2_2_1product_1serialnumber_2p_track_outgoing(self):
-        """
-        Test 2.2. (track outgoing) Creating 2 pickings with 1 product for the
-        same serial number, in the delivery orders scope, with the next form:
+        """ Test 2.2. (track outgoing) Creating 2 pickings with 1 product for
+        the same serial number, in the delivery orders scope, with the next
+        form:
         - Picking 1 OUT
         =============================================
         || Product ||  Quantity  ||  Serial Number ||
@@ -260,9 +252,8 @@ class TestUnicity(TestCommon):
         self.assertEquals(err.exception.value, msg)
 
     def test_3_1product_qtyno1_1serialnumber_1p_in(self):
-        """
-        Test 3. Creating a picking with 1 product for the same serial number,
-        in the delivery orders scope, with the next form:
+        """ Test 3. Creating a picking with 1 product for the same serial
+        number, in the delivery orders scope, with the next form:
         - Picking 1 IN
         =============================================
         || Product ||  Quantity  ||  Serial Number ||
@@ -292,8 +283,7 @@ class TestUnicity(TestCommon):
         self.assertEquals(err.exception.value, msg)
 
     def test_4_1product_qty3_3serialnumber_1p_in(self):
-        """
-        Test 4. Creating a picking with 1 product for three serial numbers,
+        """ Test 4. Creating a picking with 1 product for three serial numbers,
         in the receipts scope, with the next form:
         - Picking 1
         =============================================
@@ -331,9 +321,8 @@ class TestUnicity(TestCommon):
         )
 
     def test_5_1product_1serialnumber_2p_internal(self):
-        """
-        Test 5. Creating 2 pickings with 1 product for the same serial number,
-        in the internal scope, with the next form:
+        """ Test 5. Creating 2 pickings with 1 product for the same serial
+        number, in the internal scope, with the next form:
         - Picking 1 INTERNAL
         =============================================
         || Product ||  Quantity  ||  Serial Number ||
@@ -396,9 +385,7 @@ class TestUnicity(TestCommon):
 
     @mute_logger('openerp.sql_db')
     def test_6_1serialnumber_1product_2records(self):
-        """
-        Test 6. Creating 2 identical serial numbers
-        """
+        """ Test 6. Creating 2 identical serial numbers """
         product_id = self.env.ref('product_unique_serial.product_demo_1')
         lot_data = {
             'name': '86137801852520',
@@ -411,11 +398,8 @@ class TestUnicity(TestCommon):
             self.stock_production_lot_obj.create(lot_data)
 
     def test_7_1_1product_1serialnumber_track_production_in(self):
-        """
-        Test 7. Creating moves as production order with 1 product
-        as material, 2 moves with 1 qty  and 1 same serial number
-        for both
-        """
+        """ Test 7. Creating moves as production order with 1 product as
+        material, 2 moves with 1 qty  and 1 same serial number for both """
         product = self.env.ref('product_unique_serial.product_demo_1')
         # track_production and lot_unique_ok to test unicity
         self.assertTrue(product.write({'track_all': False,
@@ -455,10 +439,8 @@ class TestUnicity(TestCommon):
         self.assertEquals(err.exception.value, msg)
 
     def test_7_2_1product_1serialnumber_track_production_out(self):
-        """
-        Test 7.2. Creating moves as finished product, 1 product,
-        2 moves with 1 qty and 1 same serial number for both
-        """
+        """ Test 7.2. Creating moves as finished product, 1 product, 2 moves
+        with 1 qty and 1 same serial number for both """
         product = self.env.ref('product_unique_serial.product_demo_2')
         # track_incoming, track_prodcution and lot_unique_ok to test unicity
         self.assertTrue(product.write({'track_all': False,

@@ -4,7 +4,7 @@
     'author': "Vauxoo",
     'website': "http://www.vauxoo.com",
     'category': 'stock',
-    'version': '1.0',
+    'version': '8.0.0.1.0',
     'license': "AGPL-3",
     'depends': ['stock_no_negative'],
     'data': [
