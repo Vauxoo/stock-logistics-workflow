@@ -20,7 +20,7 @@ class AccountMove(models.Model):
         "(only when the invoice has been generated from a sale order).",
     )
 
-    @api.depends("invoice_line_ids", "invoice_line_ids.move_line_ids")
+    @api.depends("line_ids", "line_ids.move_line_ids")
     def _compute_picking_ids(self):
         for invoice in self:
             invoice.picking_ids = invoice.mapped(
